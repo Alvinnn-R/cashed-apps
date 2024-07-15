@@ -1,25 +1,48 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
+// Route::get('/login', function () {
+//     return view('login');
+// });
+
+// Route::post('/login', function (Request $request) {
+//     return $request;
+// });
+
+Route::get('/login', [AuthController::class, 'index'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+
+// Route::get('/', function () {
+//     return view('dashboard');
+// })->middleware('auth');
+
+Route::middleware('auth')->group(function() {
 
 Route::get('/', function () {
     return view('dashboard');
 });
 
-Route::get('/login', function () {
-    return view('login');
-});
-
 // Category
-Route::get('/categories', function () {
-    return view('category.index');
-});
-Route::get('/categories/tambah', function () {
-    return view('category.create');
-});
-Route::get('/categories/edit', function () {
-    return view('category.edit');
-});
+// Route::get('/categories', function () {
+//     return view('category.index');
+// });
+// Route::get('/categories/tambah', function () {
+//     return view('category.create');
+// });
+// Route::get('/categories/edit', function () {
+//     return view('category.edit');
+// });
+
+Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+Route::get('/categories/create', [CategoryController::class, 'create']);
+Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
+Route::get('/categories/edit/{category}', [CategoryController::class, 'edit'])->name('categories.edit');
+Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
+
 
 // Product
 Route::get('/products', function () {
@@ -41,4 +64,6 @@ Route::get('/users/tambah', function () {
 });
 Route::get('/users/edit', function () {
     return view('user.edit');
+});
+
 });

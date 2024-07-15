@@ -29,8 +29,8 @@
                 <tbody>
                     <tr>
                         <th scope="row">1</th>
-                        <td>Alvin</td>
-                        <td>alvinramas@gmail.com</td>
+                        <td>Alvin Rama Saputra</td>
+                        <td>alvinramasaputra29@gmail.com</td>
                         <td>
                             <a href="/users/edit" class="btn btn-primary btn-sm">Edit</a>
                             <button class="btn btn-danger btn-sm">Hapus</button>
