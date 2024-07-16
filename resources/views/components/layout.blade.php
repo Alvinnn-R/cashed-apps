@@ -39,20 +39,24 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-link active" aria-current="page" href="/">Dashboard</a>
-                    <a class="nav-link" href="/order">Order</a>
-                    <a class="nav-link" href="/categories">Categories</a>
-                    <a class="nav-link" href="/products">Products</a>
-                    <a class="nav-link" href="/users">Users</a>
+                    <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" aria-current="page"
+                        href="{{ route('dashboard') }}">Dashboard</a>
+                    <a class="nav-link {{ request()->routeIs('order') ? 'active' : '' }}" href="/order">Order</a>
+                    <a class="nav-link {{ request()->routeIs('categories.index') ? 'active' : '' }}"
+                        href="{{ route('categories.index') }}">Categories</a>
+                    <a class="nav-link {{ request()->routeIs('products.index') ? 'active' : '' }}"
+                        href="{{ route('products.index') }}">Products</a>
+                    <a class="nav-link {{ request()->routeIs('users.index') ? 'active' : '' }}"
+                        href="{{ route('users.index') }}">Users</a>
                 </div>
             </div>
         </div>
     </nav>
 
     @isset($title)
-    <div class="border-bottom mb-3">
-        <h4 class="container py-4 fw-bold ">{{ $title }}</h4>
-    </div>
+        <div class="border-bottom mb-3">
+            <h4 class="container py-4 fw-bold ">{{ $title }}</h4>
+        </div>
     @endisset
 
     {{ $slot }}

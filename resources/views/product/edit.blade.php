@@ -19,10 +19,10 @@
                             <label for="formFile" class="form-label">Gambar</label>
                             <input class="form-control" type="file" id="formFile">
                         </div>
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked"
-                                checked>
-                            <label class="form-check-label" for="flexSwitchCheckChecked">Aktif</label>
+                        <div class="form-check form-switch mb-3">
+                            <input class="form-check-input" type="checkbox" role="switch" id="active" name="active"
+                                @checked((!old() && $category->active) || old('active') == 'on')>
+                            <label class="form-check-label" for="active">Aktif</label>
                         </div>
                         <div class="d-flex justify-content-end">
                             <button class="btn btn-dark">Simpan</button>

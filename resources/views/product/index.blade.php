@@ -4,7 +4,7 @@
     </x-slot:title>
     <div class="container">
         <div class="d-flex justify-content-end mb-2">
-            <a href="/products/tambah" class="btn btn-success">Tambah</a>
+            <a href="/products/create" class="btn btn-success">Tambah</a>
         </div>
         <div class="card overflow-hidden">
             <table class="table table-striped m-0">
@@ -19,39 +19,34 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td><img src="" alt=""></td>
-                        <td>Roti Bakar</td>
-                        <td>10.000</td>
-                        <td>Aktif</td>
-                        <td>
-                            <a href="/products/edit" class="btn btn-primary btn-sm">Edit</a>
-                            <button class="btn btn-danger btn-sm">Hapus</button>
-                        </td>
+                    @forelse ($products as $product)
+                        <tr>
+                            <th scope="row">1</th>
+                            <td><img src="{{ Storage::url($product->image) }}" alt="{{ $product->name }}"
+                                    class="w-thumbnail img-thumbnail"></td>
+                            <td>{{ $product->name }}</td>
+                            <td>{{ $product->price }}</td>
+                            <td>
+                                @if ($product->active)
+                                    <span class="badge text-bg-primary">Aktif</span>
+                            </td>
+                        @else
+                            <span class="badge text-bg-danger">Tidak Aktif</span>
+                    @endif
+                    <td>
+                    <div class="d-flex justify-content-start gap-3">
+                            <a href="{{ route('products.edit', ['product' => $product->id]) }}"
+                                class="btn btn-primary btn-sm">Edit</a>
+                            <form action="{{ route('products.destroy', ['product' => $product->id]) }}" method="POST">
+                                @csrf
+                                @method('delete')
+                                <button class="btn btn-danger btn-sm">Hapus</button>
+                            </form>
+                        </div>
+                    </td>
                     </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td><img src="" alt=""></td>
-                        <td>Taro</td>
-                        <td>2.000</td>
-                        <td>Aktif</td>
-                        <td>
-                            <a href="/products/edit" class="btn btn-primary btn-sm">Edit</a>
-                            <button class="btn btn-danger btn-sm">Hapus</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td><img src="" alt=""></td>
-                        <td>Bakso Bakar</td>
-                        <td>8.000</td>
-                        <td>Aktif</td>
-                        <td>
-                            <a href="/products/edit" class="btn btn-primary btn-sm">Edit</a>
-                            <button class="btn btn-danger btn-sm">Hapus</button>
-                        </td>
-                    </tr>
+                @empty
+                    @endforelse
                 </tbody>
             </table>
         </div>
