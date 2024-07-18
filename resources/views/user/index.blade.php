@@ -3,18 +3,18 @@
         User
     </x-slot:title>
     <div class="container">
-        <div class="row mb-2">
-            <div class="col-4">
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-primary" type="submit">Search</button>
-                  </form>
+        @if (session('success'))
+            <div class="alert alert-success" role="alert">
+                {{ session('success') }}
             </div>
-            <div class="col-8">
-                <div class="d-flex justify-content-end mb-2">
-                    <a href="/users/tambah" class="btn btn-success">Tambah</a>
-                </div>
-            </div>
+        @endif
+        <div class="d-flex justify-content-between mb-2">
+            <form class="d-flex" role="search" method="get">
+                <input class="form-control me-2" type="search" placeholder="Cari user" aria-label="Search" name="search"
+                    value="{{ request()->search }}">
+                <button class="btn btn-outline-dark" type="submit">Search</button>
+            </form>
+            <a href="{{ route('users.create') }}" class="btn btn-success">Tambah</a>
         </div>
         <div class="card overflow-hidden">
             <table class="table table-striped m-0">
@@ -27,33 +27,26 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Alvin Rama Saputra</td>
-                        <td>alvinramasaputra29@gmail.com</td>
-                        <td>
-                            <a href="/users/edit" class="btn btn-primary btn-sm">Edit</a>
-                            <button class="btn btn-danger btn-sm">Hapus</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Riky</td>
-                        <td>riky@example.com</td>
-                        <td>
-                            <a href="/users/edit" class="btn btn-primary btn-sm">Edit</a>
-                            <button class="btn btn-danger btn-sm">Hapus</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>H. Azmi umur 2 bulan</td>
-                        <td>azmi@example.com</td>
-                        <td>
-                            <a href="/users/edit" class="btn btn-primary btn-sm">Edit</a>
-                            <button class="btn btn-danger btn-sm">Hapus</button>
-                        </td>
-                    </tr>
+                    <?php $i = 1; ?>
+                    @forelse ($users as $user)
+                        <tr>
+                            <th scope="row">{{ $i++ }}</th>
+                            <td>{{ $user->name }}</td>
+                            <td>{{ $user->email }}</td>
+                            <td>
+                                <div class="d-flex justify-content-start gap-3">
+                                    <a href="{{ route('users.edit', ['user' => $user->id]) }}"
+                                        class="btn btn-primary btn-sm">Edit</a>
+                                    <form action="{{ route('users.destroy', ['user' => $user->id]) }}" method="POST">
+                                        @csrf
+                                        @method('delete')
+                                        <button class="btn btn-danger btn-sm">Hapus</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    @empty
+                    @endforelse
                 </tbody>
             </table>
         </div>

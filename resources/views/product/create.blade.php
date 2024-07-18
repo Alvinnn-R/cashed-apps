@@ -34,7 +34,8 @@
                                     name="active" @checked(!old() || old('active') == 'on')>
                                 <label class="form-check-label" for="active">Aktif</label>
                             </div>
-                            <div class="d-flex justify-content-end">
+                            <div class="d-flex justify-content-between">
+                                <a href="{{ route('products.index') }}" class="btn btn-danger">Batal</a>
                                 <button class="btn btn-dark">Simpan</button>
                             </div>
                         </form>

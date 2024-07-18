@@ -27,6 +27,7 @@
 
     {{-- Asset bandling (Supaya browser langsung berubah tnp refresh) --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
 </head>
 
 <body class="bg-light text-dark">
@@ -49,6 +50,10 @@
                     <a class="nav-link {{ request()->routeIs('users.index') ? 'active' : '' }}"
                         href="{{ route('users.index') }}">Users</a>
                 </div>
+                <form class="d-flex ms-auto" action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="btn btn-outline-light">Logout</button>
+                </form>
             </div>
         </div>
     </nav>

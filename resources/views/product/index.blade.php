@@ -3,7 +3,12 @@
         Product
     </x-slot:title>
     <div class="container">
-        <div class="d-flex justify-content-end mb-2">
+        <div class="d-flex justify-content-between mb-2">
+            <form class="d-flex" role="search" method="get">
+                <input class="form-control me-2" type="search" placeholder="Cari product" aria-label="Search" name="search"
+                    value="{{ request()->search }}">
+                <button class="btn btn-outline-dark" type="submit">Search</button>
+            </form>
             <a href="/products/create" class="btn btn-success">Tambah</a>
         </div>
         <div class="card overflow-hidden">
@@ -13,6 +18,7 @@
                         <th scope="col">#</th>
                         <th scope="col">Gambar</th>
                         <th scope="col">Nama</th>
+                        <th scope="col">Nama Category</th>
                         <th scope="col">Harga</th>
                         <th scope="col">Aktif</th>
                         <th scope="col">Aksi</th>
@@ -25,6 +31,7 @@
                             <td><img src="{{ Storage::url($product->image) }}" alt="{{ $product->name }}"
                                     class="w-thumbnail img-thumbnail"></td>
                             <td>{{ $product->name }}</td>
+                            <td>{{ $product->category->name }}</td>
                             <td>{{ $product->price }}</td>
                             <td>
                                 @if ($product->active)
@@ -34,7 +41,7 @@
                             <span class="badge text-bg-danger">Tidak Aktif</span>
                     @endif
                     <td>
-                    <div class="d-flex justify-content-start gap-3">
+                        <div class="d-flex justify-content-start gap-3">
                             <a href="{{ route('products.edit', ['product' => $product->id]) }}"
                                 class="btn btn-primary btn-sm">Edit</a>
                             <form action="{{ route('products.destroy', ['product' => $product->id]) }}" method="POST">

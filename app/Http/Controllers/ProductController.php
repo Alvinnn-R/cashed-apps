@@ -17,7 +17,7 @@ class ProductController extends Controller
         $query = Product::query();
 
         if ($request->search) {
-            $query->where('name', 'Like', "%{ $request->search }%");
+            $query->where('name', 'like', "%{$request->search}%");
         }
 
         $products = $query->get();
@@ -76,7 +76,12 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return view('product.edit');
+        $categories = Category::query()->where('active', 1)->get();
+
+        return view('product.edit', [
+            'categories' => $categories,
+            'product' => $product,
+        ]);
     }
 
     /**
@@ -84,7 +89,24 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $request->validate([
+            'category_id' => 'required|exists:categories,id',
+            'name' => 'required',
+            'price' => 'required|numeric',
+        ]);
+
+        $product->category_id = $request->category_id;
+        $product->name = $request->name;
+        $product->price = $request->price;
+
+        if ($request->image) {
+            $product->image = Storage::disk('public')->put('products',$request->image);
+        }
+
+        $product->active = $request->active == 'on';
+        $product->save();
+
+        return redirect()->route('products.index')->with('success', 'Product berhasil diupdate!') ;
     }
 
     /**
@@ -92,6 +114,8 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+
+        return redirect()->route('products.index')->with('success', 'Product berhasil dihapus!');
     }
 }
