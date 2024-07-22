@@ -25,9 +25,10 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <?php $i = 1; ?>
                     @forelse ($products as $product)
                         <tr>
-                            <th scope="row">1</th>
+                            <th scope="row">{{ $i++ }}</th>
                             <td><img src="{{ Storage::url($product->image) }}" alt="{{ $product->name }}"
                                     class="w-thumbnail img-thumbnail"></td>
                             <td>{{ $product->name }}</td>
@@ -53,6 +54,9 @@
                     </td>
                     </tr>
                 @empty
+                    <tr>
+                        <td colspan="7" class="text-center">Belum ada category</td>
+                    </tr>
                     @endforelse
                 </tbody>
             </table>

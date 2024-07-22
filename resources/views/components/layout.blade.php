@@ -11,6 +11,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
     <style>
         * {
             font-family: "Inter", sans-serif;
@@ -42,7 +44,8 @@
                 <div class="navbar-nav">
                     <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" aria-current="page"
                         href="{{ route('dashboard') }}">Dashboard</a>
-                    <a class="nav-link {{ request()->routeIs('order') ? 'active' : '' }}" href="/order">Order</a>
+                    <a class="nav-link {{ request()->routeIs('orders.index') ? 'active' : '' }}"
+                        href="/orders">Order</a>
                     <a class="nav-link {{ request()->routeIs('categories.index') ? 'active' : '' }}"
                         href="{{ route('categories.index') }}">Categories</a>
                     <a class="nav-link {{ request()->routeIs('products.index') ? 'active' : '' }}"
@@ -50,11 +53,12 @@
                     <a class="nav-link {{ request()->routeIs('users.index') ? 'active' : '' }}"
                         href="{{ route('users.index') }}">Users</a>
                 </div>
-                <form class="d-flex ms-auto" action="{{ route('logout') }}" method="POST">
-                    @csrf
-                    <button type="submit" class="btn btn-outline-light">Logout</button>
-                </form>
             </div>
+            <div class="text-white me-4">{{ auth()->user()->name }}</div>
+            <form class="d-flex ms-auto" action="{{ route('logout') }}" method="POST">
+                @csrf
+                <button type="submit" class="btn btn-outline-danger">Logout</button>
+            </form>
         </div>
     </nav>
 
