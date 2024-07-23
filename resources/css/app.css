@@ -10,3 +10,7 @@
 .product-card:hover {
     outline: #000000 solid 2px;
 }
+
+.font-dashboard {
+    font-size: 4rem;
+}

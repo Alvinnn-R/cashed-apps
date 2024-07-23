@@ -8,36 +8,48 @@
         <div class="row mb-4">
             <div class="col">
                 <div class="Card">
-                    <div class="card-body">
-                        <div>Products Terjual</div>
-                        <H1 class="fw-bold">{{ number_format($productsSold) }}</H1>
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-bag-check-fill me-2 font-dashboard"></i>
+                        <div class="card-body">
+                            <div>Products Terjual</div>
+                            <H1 class="fw-bold">{{ number_format($productsSold) }}</H1>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="col">
                 <div class="Card">
-                    <div class="card-body">
-                        <div>Pendapatan</div>
-                        <H1 class="fw-bold">Rp{{ number_format($revenue) }}</H1>
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-coin me-2 font-dashboard"></i>
+                        <div class="card-body">
+                            <div>Pendapatan</div>
+                            <h2 class="fw-bold">Rp{{ number_format($revenue) }}</h2>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="col">
                 <div class="Card">
-                    <div class="card-body">
-                        <div>Orders</div>
-                        <H1 class="fw-bold">{{ number_format($ordersCount) }}</H1>
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-basket3 me-2 font-dashboard"></i>
+                        <div class="card-body">
+                            <div>Orders</div>
+                            <H1 class="fw-bold">{{ number_format($ordersCount) }}</H1>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="col">
                 <div class="Card">
-                    <div class="card-body">
-                        <div>products</div>
-                        <H1 class="fw-bold">{{ number_format($productsCount) }}</H1>
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-clipboard2-data font-dashboard"></i>
+                        <div class="card-body">
+                            <div>products</div>
+                            <H1 class="fw-bold">{{ number_format($productsCount) }}</H1>
+                        </div>
                     </div>
                 </div>
             </div>

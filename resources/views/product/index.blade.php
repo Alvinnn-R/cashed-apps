@@ -33,7 +33,7 @@
                                     class="w-thumbnail img-thumbnail"></td>
                             <td>{{ $product->name }}</td>
                             <td>{{ $product->category->name }}</td>
-                            <td>{{ $product->price }}</td>
+                            <td>Rp{{ number_format($product->price) }}</td>
                             <td>
                                 @if ($product->active)
                                     <span class="badge text-bg-primary">Aktif</span>

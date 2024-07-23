@@ -54,7 +54,9 @@
                         href="{{ route('users.index') }}">Users</a>
                 </div>
             </div>
-            <div class="text-white me-4">{{ auth()->user()->name }}</div>
+            <div class="me-2"></div>
+            <div class="text-white me-4"><img src="{{ asset('images/profil.jpg') }}" alt="User Photo"
+                class="rounded-circle me-2" width="40" height="40">{{ auth()->user()->name }}</div>
             <form class="d-flex ms-auto" action="{{ route('logout') }}" method="POST">
                 @csrf
                 <button type="submit" class="btn btn-outline-danger">Logout</button>
